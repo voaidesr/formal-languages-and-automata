@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 class DFA:
     def __init__(self, states: set, alphabet: set, transitions: dict, initial_state: str, final_states: set):
         self.states = states
@@ -11,7 +9,6 @@ class DFA:
     def accepts(self, string: str) -> bool:
         current_state = self.initial_state
         for char in string: 
-            char = int(char)
             if char not in self.alphabet:
                 # print(f"The symbol {char} is not in the alphabet\n")
                 # smarter:
@@ -84,6 +81,19 @@ def read_cfg(path: str) -> DFA:
     except FileNotFoundError:
         print("The file at f{path} not found.")
         return None
+
+def word_processor(dfa: DFA) -> None:
+    print("Word processing started. Please enter a word to check if it is accepted by the DFA.")
+    while True:
+        word = input("Enter a word: ")
+        if word == "exit":
+            print("Exiting word processor.")
+            break
+        if dfa.accepts(word):
+            print(f"The word {word} is accepted by the DFA.")
+        else:
+            print(f"The word {word} is not accepted by the DFA.")
+    return
     
 def main():
     # states = {'q1', 'q2', 'q3', 'q4', 'q5'}
@@ -101,5 +111,7 @@ def main():
     # print(dfa.accepts('01'))
     path = "/home/robertvoaides/Academic/s2/LFA/lab/lfa_teme/hw1/1.txt"
     dfa = read_cfg(path)
+    if dfa is not None:
+        word_processor(dfa)
 if __name__ == "__main__":
     main()
