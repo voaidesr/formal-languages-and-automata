@@ -1,5 +1,5 @@
 # First homework 
-Implementing a DFA and NFA from a configuration file. 
+Implementing a [DFA](#the-determinist-finite-automaton-dfa) and [NFA](#the-nedeterminist-finite-automaton-nfa) from a configuration file. 
 
 ## The Determinist Finite Automaton (DFA)
 
@@ -67,3 +67,4 @@ The function `word_processor(dfa: DFA) -> None` provides a simple interactive lo
 
 The `main()` function requests the path to a DFA configuration file, attempts to parse it, and then determines whether the DFA's language is empty using `has_accepting_path()`. If the language is not empty, it enters the word processing loop to allow the user to interact with the DFA.
 
+## The Nedeterminist Finite Automaton (NFA)
