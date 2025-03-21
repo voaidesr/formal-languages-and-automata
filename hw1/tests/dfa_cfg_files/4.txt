@@ -1,0 +1,26 @@
+# This is an example of the configuration file and a comment
+Sigma:
+a
+b
+c
+End
+#
+#
+States:
+q0, S
+q1
+q2
+q3
+q4
+q5, F
+End
+# another comment
+#
+Transitions:
+q0, a, q1
+q0, b, q2
+q1, b, q3
+q2, c, q4
+q3, a, q1
+q4, b, q0
+End
