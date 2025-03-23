@@ -1,4 +1,5 @@
 from src.dfa import DFA, validate_dfa, read_cfg
+import os
 
 def test_validity():
     assert validate_dfa(set(), set(), {}, set(), set()) == False
@@ -132,16 +133,18 @@ def test_accepts():
     assert not dfa7.accepts("cc")
 
 def test_read_cfg():
-    assert read_cfg("./dfa_cfg_files/1.txt") is None
+    base_path = "./tests/dfa_cfg_files/"
+    
+    assert read_cfg(os.path.join(base_path, "1.txt")) is None
 
-    assert read_cfg("./dfa_cfg_files/2.txt").has_accepting_path() == True
-    assert read_cfg("./dfa_cfg_files/2.txt").accepts("a") == False
-    assert read_cfg("./dfa_cfg_files/2.txt").accepts("b") == False
-    assert read_cfg("./dfa_cfg_files/2.txt").accepts("c") == False
-    assert read_cfg("./dfa_cfg_files/2.txt").accepts("ac") == True
-    assert read_cfg("./dfa_cfg_files/2.txt").accepts("abb") == True
-    assert read_cfg("./dfa_cfg_files/2.txt").accepts("acaaaaaaaa") == True
-    assert read_cfg("./dfa_cfg_files/2.txt").accepts("acaaaaaaaaa") == False
+    assert read_cfg(os.path.join(base_path, "2.txt")).has_accepting_path() == True
+    assert read_cfg(os.path.join(base_path, "2.txt")).accepts("a") == False
+    assert read_cfg(os.path.join(base_path, "2.txt")).accepts("b") == False
+    assert read_cfg(os.path.join(base_path, "2.txt")).accepts("c") == False
+    assert read_cfg(os.path.join(base_path, "2.txt")).accepts("ac") == True
+    assert read_cfg(os.path.join(base_path, "2.txt")).accepts("abb") == True
+    assert read_cfg(os.path.join(base_path, "2.txt")).accepts("acaaaaaaaa") == True
+    assert read_cfg(os.path.join(base_path, "2.txt")).accepts("acaaaaaaaaa") == False
 
-    assert read_cfg("./dfa_cfg_files/3.txt") is None
-    assert read_cfg("./dfa_cfg_files/4.txt").has_accepting_path() == False
+    assert read_cfg(os.path.join(base_path, "3.txt")) is None
+    assert read_cfg(os.path.join(base_path, "4.txt")).has_accepting_path() == False
