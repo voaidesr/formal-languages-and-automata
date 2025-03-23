@@ -1,4 +1,5 @@
 from collections import deque
+import os
 
 class DFA:
     def __init__(self, states: set, alphabet: set, transitions: dict, initial_state: str, final_states: set):
@@ -75,7 +76,8 @@ def validate_dfa(states: set, alphabet: set, transitions: dict, initial_state: s
     # valid through the parsing of the data - if a symbol is commented, then it will not be added to the alphabet
     # and the check (3) will fail
     if len(errors) > 0:
-        print("The data does not create a valid DFA.")
+        print("\33[91mThe data does not create a valid DFA.\33[0m")
+        print("Errors:")
         for error in errors:
             print(error)
         return False
@@ -154,13 +156,15 @@ def word_processor(dfa: DFA) -> None:
             print("Exiting word processor.")
             break
         if dfa.accepts(word):
-            print(f"The word {word} is accepted by the DFA.")
+            print(f"\033[92mThe word {word} is accepted by the DFA.\033[0m")
         else:
-            print(f"The word {word} is not accepted by the DFA.")
+            print(f"\033[91mThe word {word} is not accepted by the DFA.\033[0m")
     return
     
 def main():
-    path = input("Enter the path to the cfg file: ").strip()
+
+    config_filename = input("Enter name of config file: ").strip()
+    path = os.path.join(os.path.dirname(__file__), '..', 'config', config_filename)
     dfa = read_cfg(path)
     if dfa is None:
         return
