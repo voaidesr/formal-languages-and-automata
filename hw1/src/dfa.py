@@ -35,10 +35,10 @@ class DFA:
         current_state = self.initial_state
         for char in string: 
             if char not in self.alphabet:
-                # print(f"The symbol {char} is not in the alphabet\n")
-                # smarter:
                 raise ValueError(f"The symbol {char} is not in the alphabet.")
-            # TODO: check case when no transition is found
+            # no transition available for the current state
+            if current_state not in self.transition:
+                return False
             if char not in self.transition[current_state]:
                 return False
             current_state = self.transition[current_state][char]
