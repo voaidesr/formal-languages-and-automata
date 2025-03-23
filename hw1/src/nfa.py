@@ -164,9 +164,9 @@ def word_processor(nfa: NFA) -> None:
             print("Exiting word processor.")
             break
         if nfa.accepts(word) and word != "":
-            print(f"\033[92mThe word {word} is accepted by the DFA.\033[0m")
+            print(f"\033[92mThe word {word} is accepted by the NFA.\033[0m")
         elif word != "":
-            print(f"\033[91mThe word {word} is not accepted by the DFA.\033[0m")
+            print(f"\033[91mThe word {word} is not accepted by the NFA.\033[0m")
 
         if nfa.accepts(word) and word == "":
             print(f"\033[92mThe word λ is accepted by the NFA.\033[0m")
@@ -176,17 +176,6 @@ def word_processor(nfa: NFA) -> None:
     
 
 def main():
-    # states = {'q0', 'q1', 'q2', 'q3', 'q4', 'q5'}
-    # alphabet = {'a', 'b', 'c', 'd'}
-    # transitions = {
-    #     'q0': {'a':{'q1'}, 'b': {'q0', 'q1'}},
-    #     'q1': {'c': {'q3'}, 'd': {'q0', 'q2'}},
-    #     'q2': {'a': {'q4'}, 'c': {'q4'}},
-    #     'q3': {'b': {'q5'}},
-    #     'q4': {'a': {'q3'}, 'b': {'q3'}, 'd': {'q3'}},
-    # }
-    # initial_state = 'q0'
-    # final_states = {'q0', 'q5'}
     config_filename = input("Enter name of config file: ").strip()
     path = os.path.join(os.path.dirname(__file__), '..', 'config', config_filename)
     nfa = read_cfg(path)
