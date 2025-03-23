@@ -123,15 +123,14 @@ def read_cfg(path: str) -> DFA:
                         line = line.split(", ")
                         state = line[0]
                         # see if the state is final or initial
-                        if len(line) > 1:
-                            cat = line[1]
-                        else:
-                            cat = None
                         states.add(state)
-                        if cat == "S":
-                            initial_state.add(state) # used set in order to check if we have a unique initial state
-                                                     # could implement a check here, but i prefer having a function for validation
-                        elif cat == "F":
+                        if len(line) == 2:
+                            if line[1].lower() == "s":
+                                initial_state.add(state)
+                            elif line[1].lower() == "f":
+                                final_states.add(state)
+                        elif len(line) == 3: # e.g q0, S, F
+                            initial_state.add(state)
                             final_states.add(state)
                         continue
                     case "transitions":
@@ -155,10 +154,15 @@ def word_processor(dfa: DFA) -> None:
         if word == "exit":
             print("Exiting word processor.")
             break
-        if dfa.accepts(word):
+        if dfa.accepts(word) and word != "":
             print(f"\033[92mThe word {word} is accepted by the DFA.\033[0m")
-        else:
+        elif word != "":
             print(f"\033[91mThe word {word} is not accepted by the DFA.\033[0m")
+
+        if dfa.accepts(word) and word == "":
+            print(f"\033[92mThe word λ is accepted by the DFA.\033[0m")
+        elif word == "":
+            print(f"\033[91mThe word λ is not accepted by the DFA.\033[0m")
     return
     
 def main():
