@@ -68,3 +68,25 @@ The function `word_processor(dfa: DFA) -> None` provides a simple interactive lo
 The `main()` function requests the path to a DFA configuration file, attempts to parse it, and then determines whether the DFA's language is empty using `has_accepting_path()`. If the language is not empty, it enters the word processing loop to allow the user to interact with the DFA.
 
 ## The Nedeterminist Finite Automaton (NFA)
+
+An NFA (Nondeterministic Finite Automaton) is a generalization of a DFA in which, for a given state and input symbol, the automaton may transition to any number of next states (including none). It is defined as a 5-tuple:
+
+$$
+M = (Q, \Sigma, \delta, q_0, F)
+$$
+
+Where:
+
+- $Q$ is a **finite set** of states.
+- $\Sigma$ is a **finite input alphabet**.
+- $\delta: Q \times \Sigma \to \mathcal{P}(Q)$ is the **transition function**, mapping to a set of states.
+- $q_0 \in Q$ is the **start state**.
+- $F \subseteq Q$ is the set of **accepting (final) states**.
+
+## Implementation Overview
+
+The workflow is almost identical to the implementation of the DFA.
+
+
+
+
