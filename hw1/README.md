@@ -1,5 +1,5 @@
-# First homework 
-Implementing a [DFA](#the-determinist-finite-automaton-dfa) and [NFA](#the-nedeterminist-finite-automaton-nfa) from a configuration file. 
+# First homework
+Implementing a [DFA](#the-determinist-finite-automaton-dfa) and [NFA](#the-nedeterminist-finite-automaton-nfa) from a configuration file.
 
 ## The Determinist Finite Automaton (DFA)
 
@@ -47,7 +47,7 @@ The function `read_cfg(path: str) -> DFA` parses a configuration file that descr
 - The `States` section defines all states, with optional tags:
   - `S` marks the start state.
   - `F` marks a final state.
-- The `Transitions` section defines the transition function. Each line specifies a transition in the form:  
+- The `Transitions` section defines the transition function. Each line specifies a transition in the form:
   `source_state, input_symbol, destination_state`
 
 The parser builds the corresponding internal data structures and calls `validate_dfa(...)` to verify that:
