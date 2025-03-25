@@ -1,0 +1,5 @@
+hw1/tests/__pycache__
+hw1/tests/.pytest_cache/
+hw1/.pytest_cache/
+hw1/src/__pycache__/
+hw1/src/.pytest_cache/
