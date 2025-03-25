@@ -32,10 +32,10 @@ class NFA:
                     if state not in visited_states:
                         queue.append(state)
         return False
-    
+
     def accepts(self, string: str) -> bool:
-        current_states = {self.initial_state} # using set of states instead of a single state 
-        for char in string: 
+        current_states = {self.initial_state} # using set of states instead of a single state
+        for char in string:
             if char not in self.alphabet:
                 raise ValueError(f"The symbol {char} is not in the alphabet.")
             next_states = set()
@@ -64,11 +64,11 @@ def validate_nfa(states: set, alphabet: set, transitions: dict, initial_state: s
             # condition 2: Functia de tranzitie sa contina simboluri din alfabetul definit
             if key not in alphabet:
                 errors.add(f"Symbol {key} is not in the alphabet.")
-    
+
     for state in initial_state:
         if state not in states:
             errors.add(f"Initial state {state} is not in the set of states.")
-            
+
     for state in final_states:
         if state not in states:
             errors.add(f"Final state {state} is not in the set of states.")
@@ -77,7 +77,7 @@ def validate_nfa(states: set, alphabet: set, transitions: dict, initial_state: s
         errors.add(f"Initial state is not unique.")
     elif len(initial_state) == 0:
         errors.add(f"Initial state is not defined.")
-    # condition 4: Dacă se comenteaza elemente ale alfabetului sau ale multimii starilor 
+    # condition 4: Dacă se comenteaza elemente ale alfabetului sau ale multimii starilor
     # si sunt utilizate in functia de tranzitie atunci automatul este INVALID
 
     # valid through the parsing of the data - if a symbol is commented, then it will not be added to the alphabet
@@ -90,8 +90,8 @@ def validate_nfa(states: set, alphabet: set, transitions: dict, initial_state: s
         return False
     return True
 
-def read_cfg(path: str) -> NFA: 
-    try: 
+def read_cfg(path: str) -> NFA:
+    try:
         states = set()
         alphabet = set()
         transition = {}
@@ -100,7 +100,7 @@ def read_cfg(path: str) -> NFA:
         # keep track of the section in the file
         section = None
         with open(path) as f:
-            for line in f: 
+            for line in f:
                 line = line.strip()
                 line = line.strip(":")
                 if line[0] == "#":
@@ -161,7 +161,7 @@ def word_processor(nfa: NFA) -> None:
     while True:
         word = input("Enter a word: ")
         if word == "exit":
-            print("Exiting word processor.")
+            print("\033[93mExiting word processor.\033[0m")
             break
         if nfa.accepts(word) and word != "":
             print(f"\033[92mThe word {word} is accepted by the NFA.\033[0m")
@@ -173,7 +173,7 @@ def word_processor(nfa: NFA) -> None:
         elif word == "":
             print(f"\033[91mThe word λ is not accepted by the NFA.\033[0m")
     return
-    
+
 
 def main():
     config_filename = input("Enter name of config file: ").strip()
