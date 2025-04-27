@@ -6,6 +6,6 @@ Here are all the all of the LFA homeworks.
 ## [Homework 2](./hw2/)
 - [x] Regex parser
 - [x] Transform regex into postfix form
-- [ ] Construct NFA with Thompson
+- [x] Construct NFA with Thompson
 - [ ] Convert NFA to DFA with subset construction
 - [ ] Minimise the DFA

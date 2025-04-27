@@ -8,7 +8,7 @@ def tokenize(regex:str) -> list[str]:
 
     # to verify that a token is not an operator
     def is_literal(token: str) -> bool:
-        return token and token not in operators and token != "."
+        return token and (token not in operators) and (token != ".")
 
     for i in range(0, L):
         tokens.append(regex[i])
@@ -32,8 +32,8 @@ def to_postfix(regex: str) -> list[str]:
     prec = {"|": 1, ".": 2, "*": 3, "+": 3, "?": 3}
     left_assoc = {"|", "."}
 
-    output = []
-    op_stack = []
+    output: list[str] = []
+    op_stack: list[str] = []
 
     for token in tokenize(regex):
         if token in prec:
