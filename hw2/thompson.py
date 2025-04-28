@@ -75,9 +75,6 @@ def postfix_to_nfa(tokens: list[str]) -> NFA:
             trans.setdefault(f_old, {}).setdefault(LAMBDA, set()).add(f_new)
             stack.append((s_new, f_new, trans))
 
-    if len(stack) != 1:
-        raise ValueError("Error: invalid postfix expression.")
-
     start, accept, transitions = stack.pop()
 
     states: set[str] = set(transitions)
