@@ -7,5 +7,5 @@ Here are all the all of the LFA homeworks.
 - [x] Regex parser
 - [x] Transform regex into postfix form
 - [x] Construct NFA with Thompson
-- [ ] Convert NFA to DFA with subset construction
+- [x] Convert NFA to DFA with subset construction
 - [ ] Minimise the DFA
