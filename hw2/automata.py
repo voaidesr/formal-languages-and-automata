@@ -1,4 +1,11 @@
 from collections import deque
+from graphviz import Source, Digraph
+
+def _dot_base(name: str = "automaton") -> "Digraph":
+    g = Digraph(name=name, format="png")
+    g.attr(rankdir="LR", fontsize="12", labelloc="t", fontname="Helvetica")
+    g.attr("node", fontname="Helvetica")
+    return g
 
 LAMBDA = "λ"
 class DFA:
@@ -35,7 +42,7 @@ class DFA:
         current_state = self.initial_state
         for char in string:
             if char not in self.alphabet:
-                raise ValueError(f"The symbol {char} is not in the alphabet.")
+                return False
             # no transition available for the current state
             if current_state not in self.transition:
                 return False
@@ -44,6 +51,28 @@ class DFA:
             current_state = self.transition[current_state][char]
         # verifies if the dfa has reached a final state
         return current_state in self.final_states
+
+    def to_dot(self) -> str:
+        if Digraph is None:
+            raise RuntimeError("python-graphviz not installed.")
+        g = _dot_base("DFA")
+        g.node("start", shape="point")
+        g.edge("start", self.initial_state, label="")
+        for state in self.states:
+            shape = "doublecircle" if state in self.final_states else "circle"
+            g.node(state, shape=shape)
+        for src, adict in self.transition.items():
+            grouped: dict[str, list[str]] = {}
+            for sym, dst in adict.items():
+                grouped.setdefault(dst, []).append(sym)
+            for dst, syms in grouped.items():
+                g.edge(src, dst, label=",".join(sorted(syms)))
+        return g.source
+
+    def render(self, path: str, format: str = "png") -> None:
+        if Digraph is None:
+            raise RuntimeError("python-graphviz not installed.")
+        Source(self.to_dot(), filename=path, format=format).render(cleanup=True)
 
 class NFA:
     def __init__(self, states: set, alphabet: set, transitions: dict, initial_state: str, final_states: set):
@@ -104,3 +133,26 @@ class NFA:
             if state in self.final_states:
                 return True
         return False
+
+    def to_dot(self) -> str:
+        if Digraph is None:
+            raise RuntimeError("python-graphviz not installed.")
+        g = _dot_base("NFA")
+        g.node("start", shape="point")
+        g.edge("start", self.initial_state, label="")
+        for state in self.states:
+            shape = "doublecircle" if state in self.final_states else "circle"
+            g.node(state, shape=shape)
+        for src, adict in self.transition.items():
+            grouped: dict[frozenset[str], list[str]] = {}
+            for sym, dst_set in adict.items():
+                for dst in dst_set:
+                    grouped.setdefault((dst,), []).append(sym)
+            for (dst,), syms in grouped.items():
+                g.edge(src, dst, label=",".join(sorted(syms)))
+        return g.source
+
+    def render(self, path: str, format: str = "png") -> None:
+        if Digraph is None:
+            raise RuntimeError("python-graphviz not installed.")
+        Source(self.to_dot(), filename=path, format=format).render(cleanup=True)
