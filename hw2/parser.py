@@ -8,7 +8,7 @@ def tokenize(regex:str) -> list[str]:
 
     # to verify that a token is not an operator
     def is_literal(token: str) -> bool:
-        return token and (token not in operators) and (token != ".")
+        return bool(token and (token not in operators) and (token != "."))
 
     for i in range(0, L):
         tokens.append(regex[i])
@@ -16,8 +16,9 @@ def tokenize(regex:str) -> list[str]:
         if i < L - 1:
             current = regex[i]
             next = regex[i+1]
-            if (is_literal(current) or current in ")*?") and (is_literal(next) or next == "("):
+            if (is_literal(current) or current in ")*+?") and (is_literal(next) or next == "("):
                 tokens.append(".")
+
 
     return tokens
 
