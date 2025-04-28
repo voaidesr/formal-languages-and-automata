@@ -8,4 +8,4 @@ Here are all the all of the LFA homeworks.
 - [x] Transform regex into postfix form
 - [x] Construct NFA with Thompson
 - [x] Convert NFA to DFA with subset construction
-- [ ] Minimise the DFA
+- [x] Minimise the DFA
