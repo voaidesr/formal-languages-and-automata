@@ -1,3 +1,5 @@
+__all__ = ["to_postfix"]
+
 def tokenize(regex:str) -> list[str]:
     """
     This breaks a regex into tokens (characters and the operators "|+*?()")

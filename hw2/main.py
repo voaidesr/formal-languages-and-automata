@@ -3,7 +3,7 @@ from thompson import postfix_to_nfa
 from subset import nfa_to_dfa
 from minimise import minimise_dfa
 
-def main() -> None:
+def main():
     regex = "(a|b)*a(a|b)"
     postfix = to_postfix(regex)
     nfa = postfix_to_nfa(postfix)
