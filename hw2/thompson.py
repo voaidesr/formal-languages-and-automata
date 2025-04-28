@@ -1,8 +1,8 @@
 import itertools
 import copy
-from automata import NFA
+from automata import NFA, LAMBDA
 
-LAMBDA = "λ"
+__all__ = ["postfix_to_nfa"]
 
 # adds new states keeping count of how many states there are already
 def _new_state(counter: itertools.count) -> str:
