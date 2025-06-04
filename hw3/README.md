@@ -36,8 +36,7 @@ Generated words:
   ab
   aaaabbbb
 ```
->[!Warning]
-> Word acceptance:
+Word acceptance:
 
 ```
 Type words to test (blank line to quit):
